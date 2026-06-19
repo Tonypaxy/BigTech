@@ -1,0 +1,2167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BIGTECH Agency Limited</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+    <style>
+        /* ===== RESET & BASE ===== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+            scroll-behavior: smooth;
+        }
+
+        :root {
+            --primary: #1608c7;
+            --secondary: #1d1391;
+            --gold: #d9a441;
+            --white: #ffffff;
+        }
+
+        body {
+            background: linear-gradient(180deg, #1608c7, #1d1391);
+            color: white;
+            overflow-x: hidden;
+        }
+
+        /* ===== LOADER ===== */
+        #loader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(180deg, #1608c7, #1d1391);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+            transition: opacity 0.6s ease, visibility 0.6s ease;
+        }
+
+        #loader.hidden {
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+        }
+
+        .loader-content {
+            text-align: center;
+        }
+
+        .toy-loader {
+            position: relative;
+            width: 120px;
+            height: 100px;
+            margin: 0 auto 30px;
+        }
+
+        .toy-block {
+            position: absolute;
+            width: 40px;
+            height: 40px;
+            border-radius: 6px;
+            animation: toyStack 1.8s ease-in-out infinite;
+        }
+
+        .block-1 {
+            background: #d9a441;
+            bottom: 0;
+            left: 10px;
+            animation-delay: 0s;
+        }
+
+        .block-2 {
+            background: #ffffff;
+            bottom: 0;
+            left: 40px;
+            animation-delay: 0.3s;
+        }
+
+        .block-3 {
+            background: #1608c7;
+            bottom: 0;
+            left: 70px;
+            animation-delay: 0.6s;
+        }
+
+        .block-4 {
+            background: #d9a441;
+            bottom: 0;
+            left: 40px;
+            animation-delay: 0.9s;
+            width: 40px;
+            height: 20px;
+            border-radius: 6px 6px 0 0;
+        }
+
+        .toy-shadow {
+            position: absolute;
+            bottom: -8px;
+            left: 10%;
+            width: 80%;
+            height: 8px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            filter: blur(6px);
+            animation: shadowPulse 1.8s ease-in-out infinite;
+        }
+
+        @keyframes toyStack {
+            0%,
+            100% {
+                transform: translateY(0) scale(1);
+            }
+            50% {
+                transform: translateY(-30px) scale(1.05);
+            }
+        }
+
+        @keyframes shadowPulse {
+            0%,
+            100% {
+                transform: scale(1);
+                opacity: 0.2;
+            }
+            50% {
+                transform: scale(0.7);
+                opacity: 0.5;
+            }
+        }
+
+        .loader-text {
+            font-size: 1.1rem;
+            color: rgba(255, 255, 255, 0.7);
+            letter-spacing: 2px;
+            animation: pulseText 1.4s ease-in-out infinite;
+        }
+
+        @keyframes pulseText {
+            0%,
+            100% {
+                opacity: 0.3;
+            }
+            50% {
+                opacity: 1;
+            }
+        }
+
+        /* ===== NAVBAR ===== */
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            padding: 15px 5%;
+            background: rgba(22, 8, 199, 0.95);
+            backdrop-filter: blur(10px);
+        }
+
+        nav {
+            background: var(--secondary);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 30px;
+            border-radius: 12px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, .3);
+            position: relative;
+        }
+
+        .logo {
+            display: flex;
+            align-items: baseline;
+            gap: 2px;
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: white;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .logo-agency {
+            color: white;
+        }
+
+        .logo-limited {
+            font-size: 0.7rem;
+            font-weight: 600;
+            color: rgba(255, 255, 255, 0.5);
+            letter-spacing: 1px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 20px;
+            list-style: none;
+            align-items: center;
+        }
+
+        .nav-links>li {
+            position: relative;
+        }
+
+        .nav-links>li>a {
+            text-decoration: none;
+            color: white;
+            font-size: 14px;
+            font-weight: 500;
+            transition: 0.3s;
+            font-family: 'Poppins', sans-serif;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .nav-links>li>a:hover {
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        .nav-links>li>a .arrow {
+            font-size: 10px;
+            transition: 0.3s;
+        }
+
+        .nav-links>li:hover>a .arrow {
+            transform: rotate(180deg);
+        }
+
+        /* ===== DROPDOWN MENUS ===== */
+        .dropdown {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background: var(--secondary);
+            min-width: 240px;
+            border-radius: 10px;
+            padding: 10px 0;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(10px);
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+            z-index: 100;
+        }
+
+        .nav-links>li:hover .dropdown {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .dropdown li {
+            list-style: none;
+        }
+
+        .dropdown li a {
+            display: block;
+            padding: 10px 20px;
+            color: rgba(255, 255, 255, 0.85);
+            text-decoration: none;
+            font-size: 13px;
+            font-weight: 500;
+            transition: 0.3s;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .dropdown li a:hover {
+            background: rgba(255, 255, 255, 0.05);
+            color: white;
+        }
+
+        .dropdown li a i {
+            margin-right: 10px;
+            width: 18px;
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        .contact-btn {
+            padding: 10px 28px;
+            border: 1px solid white;
+            border-radius: 6px;
+            text-decoration: none;
+            color: white;
+            transition: .3s;
+            font-weight: 500;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .contact-btn:hover {
+            background: white;
+            color: var(--primary);
+        }
+
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 4px;
+        }
+
+        .hamburger-line {
+            width: 28px;
+            height: 2.5px;
+            background: white;
+            border-radius: 2px;
+            transition: all 0.3s ease;
+        }
+
+        .hamburger.active .hamburger-line:nth-child(1) {
+            transform: rotate(45deg) translate(5px, 5px);
+        }
+
+        .hamburger.active .hamburger-line:nth-child(2) {
+            opacity: 0;
+        }
+
+        .hamburger.active .hamburger-line:nth-child(3) {
+            transform: rotate(-45deg) translate(5px, -5px);
+        }
+
+        /* ===== HERO ===== */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 120px 20px 50px;
+        }
+
+        .hero-box {
+            background: var(--secondary);
+            width: 100%;
+            max-width: 1200px;
+            border-radius: 20px;
+            padding: 80px 30px;
+            text-align: center;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .hero-badge {
+            display: inline-block;
+            font-size: 0.7rem;
+            font-weight: 600;
+            color: rgba(255, 255, 255, 0.7);
+            background: rgba(255, 255, 255, 0.05);
+            padding: 4px 16px;
+            border-radius: 50px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            margin-bottom: 20px;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .hero h1 {
+            font-size: 5rem;
+            font-weight: 800;
+            letter-spacing: 3px;
+            font-family: 'Poppins', sans-serif;
+            color: white;
+        }
+
+        .hero h1 .agency {
+            color: white;
+        }
+
+        .hero .limited {
+            font-size: 1rem;
+            color: rgba(255, 255, 255, 0.5);
+            letter-spacing: 4px;
+            font-weight: 600;
+            display: block;
+            margin-top: 4px;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .hero p {
+            font-size: 1.8rem;
+            margin-top: 20px;
+            font-family: 'Poppins', sans-serif;
+            color: white;
+        }
+
+        /* ===== ONLY THE TYPING TEXT IS GOLD ===== */
+        .typing-text {
+            display: inline-block;
+            position: relative;
+            color: var(--gold) !important;
+            font-weight: 700;
+            min-width: 180px;
+        }
+
+        .typing-text::after {
+            content: '|';
+            position: absolute;
+            right: -8px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--gold);
+            animation: blink 0.8s step-end infinite;
+        }
+
+        @keyframes blink {
+            0%,
+            100% {
+                opacity: 1;
+            }
+            50% {
+                opacity: 0;
+            }
+        }
+
+        .gold-line {
+            width: 100px;
+            height: 4px;
+            background: rgba(255, 255, 255, 0.2);
+            margin: 30px auto;
+            border-radius: 2px;
+        }
+
+        .hero-description {
+            color: rgba(255, 255, 255, 0.8);
+            max-width: 600px;
+            margin: 16px auto 32px;
+            line-height: 1.8;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .hero-btn {
+            display: inline-block;
+            padding: 15px 40px;
+            border: 1px solid white;
+            text-decoration: none;
+            color: white;
+            transition: .3s;
+            border-radius: 6px;
+            font-weight: 500;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .hero-btn:hover {
+            background: white;
+            color: var(--primary);
+        }
+
+        .hero-stats {
+            display: flex;
+            justify-content: center;
+            gap: 60px;
+            margin-top: 48px;
+            flex-wrap: wrap;
+        }
+
+        .stat-item {
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 2.2rem;
+            font-weight: 800;
+            color: white;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .stat-label {
+            font-size: 0.8rem;
+            color: rgba(255, 255, 255, 0.6);
+            font-weight: 500;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        /* ===== SECTION ===== */
+        section {
+            padding: 80px 5%;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 3rem;
+            margin-bottom: 10px;
+            font-family: 'Poppins', sans-serif;
+            font-weight: 800;
+            color: white;
+        }
+
+        .section-title .gold {
+            color: white;
+        }
+
+        .section-tag {
+            display: block;
+            text-align: center;
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: rgba(255, 255, 255, 0.6);
+            margin-bottom: 12px;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .subtitle {
+            text-align: center;
+            margin-bottom: 50px;
+            color: rgba(255, 255, 255, 0.8);
+            max-width: 640px;
+            margin-left: auto;
+            margin-right: auto;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .subtitle strong {
+            color: white;
+        }
+
+        /* ===== ABOUT ===== */
+        .about {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+            align-items: center;
+        }
+
+        .robot {
+            text-align: center;
+            font-size: 12rem;
+            background: var(--secondary);
+            padding: 40px;
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: white;
+        }
+
+        .about h3 {
+            font-size: 2rem;
+            margin-bottom: 15px;
+            font-family: 'Poppins', sans-serif;
+            font-weight: 700;
+            color: white;
+        }
+
+        .about p {
+            line-height: 1.9;
+            color: rgba(255, 255, 255, 0.85);
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .about .gold-line {
+            margin-left: 0;
+        }
+
+        /* ===== MISSION ===== */
+        .mission-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+
+        .card {
+            text-align: center;
+            padding: 30px;
+            background: var(--secondary);
+            border-radius: 16px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: 0.3s;
+        }
+
+        .card:hover {
+            transform: translateY(-6px);
+            border-color: rgba(255, 255, 255, 0.3);
+        }
+
+        .card span {
+            font-size: 4rem;
+            display: block;
+            margin-bottom: 20px;
+            color: white;
+        }
+
+        .card h3 {
+            margin-bottom: 15px;
+            color: white;
+            font-family: 'Poppins', sans-serif;
+            font-weight: 700;
+        }
+
+        .card p {
+            color: rgba(255, 255, 255, 0.85);
+            line-height: 1.7;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        /* ===== INDUSTRIES ===== */
+        .industry-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 24px;
+            margin-top: 40px;
+        }
+
+        .industry-card {
+            background: var(--secondary);
+            padding: 30px 20px;
+            border-radius: 12px;
+            transition: .3s;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            text-align: center;
+        }
+
+        .industry-card:hover {
+            transform: translateY(-10px);
+            border-color: rgba(255, 255, 255, 0.3);
+        }
+
+        .industry-card .icon {
+            font-size: 2.5rem;
+            color: white;
+            margin-bottom: 12px;
+        }
+
+        .industry-card h3 {
+            margin-bottom: 12px;
+            color: white;
+            font-family: 'Poppins', sans-serif;
+            font-weight: 700;
+        }
+
+        .industry-card p {
+            color: rgba(255, 255, 255, 0.8);
+            line-height: 1.6;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        /* ===== SERVICES ===== */
+        .services {
+            background: rgba(0, 0, 0, 0.15);
+        }
+
+        .service-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 28px;
+            margin-top: 40px;
+        }
+
+        .service-card {
+            background: var(--secondary);
+            padding: 32px 24px;
+            border-radius: 12px;
+            text-align: center;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: 0.3s;
+        }
+
+        .service-card:hover {
+            transform: translateY(-6px);
+            border-color: rgba(255, 255, 255, 0.3);
+        }
+
+        .service-card .icon {
+            font-size: 2.8rem;
+            color: white;
+            margin-bottom: 16px;
+        }
+
+        .service-card h3 {
+            margin-bottom: 12px;
+            color: white;
+            font-family: 'Poppins', sans-serif;
+            font-weight: 700;
+        }
+
+        .service-card p {
+            color: rgba(255, 255, 255, 0.85);
+            line-height: 1.7;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .service-cta {
+            display: inline-block;
+            margin-top: 16px;
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.85rem;
+            transition: 0.3s;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .service-cta:hover {
+            color: white;
+        }
+
+        /* ===== IMPACT STATS ===== */
+        .impact-stats {
+            display: flex;
+            justify-content: center;
+            gap: 60px;
+            margin: 40px 0;
+            flex-wrap: wrap;
+        }
+
+        .impact-stat {
+            text-align: center;
+        }
+
+        .impact-number {
+            font-size: 3.2rem;
+            font-weight: 900;
+            color: white;
+            display: block;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .impact-label {
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.7);
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .impact-actions {
+            display: flex;
+            gap: 16px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 24px;
+        }
+
+        /* ===== FOUNDER ===== */
+        .founder-card {
+            max-width: 800px;
+            margin: 40px auto 0;
+            text-align: center;
+            padding: 48px 32px;
+            background: var(--secondary);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+        }
+
+        .founder-card .quote-icon {
+            font-size: 3rem;
+            color: rgba(255, 255, 255, 0.2);
+            margin-bottom: 16px;
+        }
+
+        .founder-card blockquote p {
+            font-size: 1.05rem;
+            color: rgba(255, 255, 255, 0.85);
+            line-height: 1.9;
+            margin-bottom: 16px;
+            font-style: italic;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .founder-name {
+            font-weight: 700;
+            color: white;
+            font-size: 1rem;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        /* ===== SUPPORT ===== */
+        .support-grid {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .support-newsletter {
+            text-align: center;
+        }
+
+        .support-newsletter h2 {
+            font-size: 2rem;
+            margin-bottom: 12px;
+            font-family: 'Poppins', sans-serif;
+            color: white;
+        }
+
+        .support-newsletter h2 .gold {
+            color: white;
+        }
+
+        .support-newsletter p {
+            color: rgba(255, 255, 255, 0.8);
+            margin-bottom: 24px;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .form-group {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .form-group input {
+            flex: 1;
+            min-width: 200px;
+            padding: 14px 20px;
+            border-radius: 8px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            background: var(--secondary);
+            color: white;
+            font-size: 0.95rem;
+            transition: 0.3s;
+            outline: none;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .form-group input:focus {
+            border-color: rgba(255, 255, 255, 0.5);
+        }
+
+        .form-group input::placeholder {
+            color: rgba(255, 255, 255, 0.4);
+        }
+
+        .form-message {
+            margin-top: 12px;
+            font-size: 0.9rem;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .form-message.success {
+            color: #4ade80;
+        }
+
+        .form-message.error {
+            color: #f87171;
+        }
+
+        /* ===== CONTACT ===== */
+        .contact {
+            text-align: center;
+        }
+
+        .contact-wrapper {
+            display: grid;
+            grid-template-columns: 1fr 1.5fr;
+            gap: 48px;
+            max-width: 1100px;
+            margin: 0 auto;
+            text-align: left;
+        }
+
+        .contact-info h2 {
+            font-size: 2.2rem;
+            margin-bottom: 12px;
+            font-family: 'Poppins', sans-serif;
+            color: white;
+        }
+
+        .contact-info h2 .gold {
+            color: white;
+        }
+
+        .contact-info p {
+            color: rgba(255, 255, 255, 0.8);
+            line-height: 1.7;
+            margin-bottom: 12px;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .contact-link {
+            color: rgba(255, 255, 255, 0.7);
+            font-weight: 600;
+            text-decoration: none;
+            transition: 0.3s;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .contact-link:hover {
+            color: white;
+        }
+
+        .social-icons {
+            display: flex;
+            gap: 16px;
+            margin-top: 16px;
+            flex-wrap: wrap;
+        }
+
+        .social-icons a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            background: var(--secondary);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: white;
+            text-decoration: none;
+            transition: 0.3s;
+        }
+
+        .social-icons a:hover {
+            border-color: rgba(255, 255, 255, 0.3);
+            color: white;
+            transform: translateY(-3px);
+        }
+
+        .contact-box {
+            max-width: 700px;
+            margin: auto;
+            background: var(--secondary);
+            padding: 40px;
+            border-radius: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+        }
+
+        .contact-box label {
+            display: block;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-bottom: 6px;
+            color: rgba(255, 255, 255, 0.7);
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .contact-box input,
+        .contact-box select,
+        .contact-box textarea {
+            width: 100%;
+            padding: 14px;
+            margin-bottom: 15px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            outline: none;
+            border-radius: 8px;
+            background: rgba(0, 0, 0, 0.2);
+            color: white;
+            font-size: 0.95rem;
+            transition: 0.3s;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .contact-box input:focus,
+        .contact-box select:focus,
+        .contact-box textarea:focus {
+            border-color: rgba(255, 255, 255, 0.5);
+        }
+
+        .contact-box input::placeholder,
+        .contact-box textarea::placeholder {
+            color: rgba(255, 255, 255, 0.4);
+        }
+
+        .contact-box select option {
+            background: var(--secondary);
+        }
+
+        .contact-box textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        .contact-box .btn-full {
+            width: 100%;
+        }
+
+        button {
+            padding: 15px 40px;
+            background: rgba(255, 255, 255, 0.15);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 6px;
+            font-weight: 600;
+            transition: 0.3s;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        button:hover {
+            background: rgba(255, 255, 255, 0.25);
+            transform: translateY(-2px);
+        }
+
+        /* ===== FOOTER ===== */
+        footer {
+            text-align: center;
+            padding: 40px 5%;
+            margin-top: 50px;
+            background: rgba(0, 0, 0, 0.3);
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1.2fr;
+            gap: 40px;
+            max-width: 1200px;
+            margin: 0 auto 40px;
+            text-align: left;
+        }
+
+        .footer-brand .logo {
+            font-size: 1.5rem;
+            margin-bottom: 12px;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .footer-brand p {
+            font-size: 0.85rem;
+            color: rgba(255, 255, 255, 0.7);
+            line-height: 1.7;
+            max-width: 320px;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .footer-links h4 {
+            font-size: 0.9rem;
+            font-weight: 700;
+            margin-bottom: 16px;
+            color: white;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .footer-links ul {
+            list-style: none;
+        }
+
+        .footer-links ul li {
+            margin-bottom: 10px;
+        }
+
+        .footer-links ul a {
+            text-decoration: none;
+            font-size: 0.85rem;
+            color: rgba(255, 255, 255, 0.7);
+            transition: 0.3s;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .footer-links ul a:hover {
+            color: white;
+        }
+
+        .footer-contact p {
+            font-size: 0.85rem;
+            color: rgba(255, 255, 255, 0.7);
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .footer-contact p i {
+            color: rgba(255, 255, 255, 0.5);
+            width: 18px;
+        }
+
+        .footer-socials {
+            display: flex;
+            gap: 12px;
+            margin-top: 16px;
+            flex-wrap: wrap;
+        }
+
+        .footer-socials a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: white;
+            text-decoration: none;
+            transition: 0.3s;
+        }
+
+        .footer-socials a:hover {
+            border-color: rgba(255, 255, 255, 0.3);
+            color: white;
+            transform: translateY(-3px);
+        }
+
+        .footer-bottom {
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            padding-top: 24px;
+            text-align: center;
+        }
+
+        .footer-bottom p {
+            font-size: 0.8rem;
+            color: rgba(255, 255, 255, 0.4);
+            font-family: 'Poppins', sans-serif;
+        }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 1200px) {
+            section {
+                padding: 60px 4%;
+            }
+
+            .hero h1 {
+                font-size: 4rem;
+            }
+        }
+
+        @media (max-width: 1024px) {
+            .about {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            .about .gold-line {
+                margin: 24px auto;
+            }
+
+            .footer-grid {
+                grid-template-columns: 1fr 1fr;
+                gap: 32px;
+            }
+
+            .contact-wrapper {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            .social-icons {
+                justify-content: center;
+            }
+
+            .contact-info {
+                text-align: center;
+            }
+        }
+
+        @media (max-width: 900px) {
+            .hamburger {
+                display: flex;
+            }
+
+            .nav-links {
+                position: fixed;
+                top: 0;
+                right: -100%;
+                width: 75%;
+                max-width: 350px;
+                height: 100vh;
+                background: var(--secondary);
+                flex-direction: column;
+                padding: 80px 24px 32px;
+                gap: 8px;
+                transition: all 0.3s ease;
+                border-left: 1px solid rgba(255, 255, 255, 0.1);
+                overflow-y: auto;
+            }
+
+            .nav-links.open {
+                right: 0;
+            }
+
+            .nav-links>li {
+                width: 100%;
+            }
+
+            .nav-links>li>a {
+                font-size: 1rem;
+                padding: 10px 0;
+                width: 100%;
+                display: flex;
+                justify-content: space-between;
+            }
+
+            .nav-links>li>a .arrow {
+                font-size: 14px;
+            }
+
+            .dropdown {
+                position: static;
+                opacity: 1;
+                visibility: visible;
+                transform: none;
+                background: rgba(0, 0, 0, 0.2);
+                border-radius: 8px;
+                padding: 5px 0;
+                margin: 0;
+                display: none;
+                border: none;
+                box-shadow: none;
+                width: 100%;
+            }
+
+            .nav-links>li:hover .dropdown {
+                display: none;
+            }
+
+            .nav-links>li.dropdown-open .dropdown {
+                display: block;
+            }
+
+            .dropdown li a {
+                padding: 10px 16px;
+                font-size: 0.9rem;
+            }
+
+            .dropdown li a i {
+                width: 20px;
+            }
+
+            .hero h1 {
+                font-size: 3rem;
+            }
+
+            .hero p {
+                font-size: 1.3rem;
+            }
+
+            .hero-stats {
+                gap: 30px;
+            }
+
+            .section-title {
+                font-size: 2.2rem;
+            }
+
+            .robot {
+                font-size: 8rem;
+            }
+
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+
+            .form-group {
+                flex-direction: column;
+            }
+
+            .footer-grid {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            .footer-brand p {
+                max-width: 100%;
+            }
+
+            .footer-contact p {
+                justify-content: center;
+            }
+
+            .contact-box {
+                padding: 24px;
+            }
+
+            .industry-grid {
+                grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            }
+
+            .contact-btn {
+                display: none;
+            }
+
+            .mobile-contact-btn {
+                display: block !important;
+                text-align: center;
+                padding: 12px;
+                background: rgba(255, 255, 255, 0.15);
+                border-radius: 8px;
+                color: white;
+                text-decoration: none;
+                font-weight: 600;
+                margin-top: 10px;
+                border: 1px solid rgba(255, 255, 255, 0.1);
+            }
+        }
+
+        @media (max-width: 600px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero p {
+                font-size: 1.1rem;
+            }
+
+            .hero-box {
+                padding: 40px 20px;
+            }
+
+            .hero-stats {
+                flex-direction: column;
+                gap: 16px;
+            }
+
+            .hero-stats .stat-item {
+                width: 100%;
+            }
+
+            .impact-stats {
+                flex-direction: column;
+                align-items: center;
+                gap: 24px;
+            }
+
+            .industry-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .service-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .mission-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .section-title {
+                font-size: 1.8rem;
+            }
+
+            .robot {
+                font-size: 5rem;
+                padding: 20px;
+            }
+
+            .about h3 {
+                font-size: 1.5rem;
+            }
+
+            .hero-btn {
+                padding: 12px 24px;
+                font-size: 0.9rem;
+            }
+
+            .contact-box {
+                padding: 16px;
+            }
+
+            .contact-box input,
+            .contact-box select,
+            .contact-box textarea {
+                padding: 12px;
+                font-size: 0.85rem;
+            }
+
+            button {
+                padding: 12px 24px;
+                font-size: 0.9rem;
+            }
+
+            .footer-grid {
+                gap: 24px;
+            }
+
+            .footer-brand .logo {
+                font-size: 1.2rem;
+            }
+
+            .stat-number {
+                font-size: 1.8rem;
+            }
+
+            .impact-number {
+                font-size: 2.5rem;
+            }
+
+            .founder-card {
+                padding: 32px 20px;
+            }
+
+            .founder-card blockquote p {
+                font-size: 0.95rem;
+            }
+        }
+
+        @media (max-width: 400px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .hero .limited {
+                font-size: 0.8rem;
+            }
+
+            .hero p {
+                font-size: 1rem;
+            }
+
+            .hero-box {
+                padding: 30px 16px;
+            }
+
+            .section-title {
+                font-size: 1.5rem;
+            }
+
+            nav {
+                padding: 12px 16px;
+            }
+
+            .logo {
+                font-size: 1.3rem;
+            }
+
+            .service-card {
+                padding: 24px 16px;
+            }
+
+            .card {
+                padding: 24px 16px;
+            }
+
+            .industry-card {
+                padding: 20px 16px;
+            }
+
+            .stat-number {
+                font-size: 1.5rem;
+            }
+        }
+
+        .mobile-contact-btn {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ===== LOADER ===== -->
+    <div id="loader">
+        <div class="loader-content">
+            <div class="toy-loader">
+                <div class="toy-block block-1"></div>
+                <div class="toy-block block-2"></div>
+                <div class="toy-block block-3"></div>
+                <div class="toy-block block-4"></div>
+                <div class="toy-shadow"></div>
+            </div>
+            <p class="loader-text">Building Innovative Solutions...</p>
+        </div>
+    </div>
+
+    <!-- ===== MAIN CONTENT ===== -->
+    <div id="main-content">
+
+        <!-- ===== HEADER ===== -->
+        <header>
+            <nav>
+                <div class="logo">
+                    BIGTECH
+                    <span class="logo-agency">AGENCY</span>
+                    <span class="logo-limited">LIMITED</span>
+                </div>
+
+                <ul class="nav-links" id="navLinks">
+                    <li><a href="#home">HOME</a></li>
+                    <li><a href="#about">ABOUT US</a></li>
+                    <li>
+                        <a href="#services">
+                            SERVICES <span class="arrow"><i class="fas fa-chevron-down"></i></span>
+                        </a>
+                        <ul class="dropdown">
+                            <li><a href="#services"><i class="fas fa-code"></i> Software Development</a></li>
+                            <li><a href="#services"><i class="fas fa-mobile-alt"></i> Mobile App Development</a></li>
+                            <li><a href="#services"><i class="fas fa-globe"></i> Web Development</a></li>
+                            <li><a href="#services"><i class="fas fa-drafting-compass"></i> UI/UX Design and Prototyping</a></li>
+                            <li><a href="#services"><i class="fas fa-paint-brush"></i> Brand Identity Design</a></li>
+                            <li><a href="#services"><i class="fas fa-chart-pie"></i> IT Consultation & Strategy</a></li>
+                            <li><a href="#services"><i class="fas fa-chalkboard-teacher"></i> Digital Training</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#impact">
+                            SOCIAL IMPACT <span class="arrow"><i class="fas fa-chevron-down"></i></span>
+                        </a>
+                        <ul class="dropdown">
+                            <li><a href="#impact"><i class="fas fa-hand-holding-heart"></i> Corporate Social Responsibility</a></li>
+                            <li><a href="#impact"><i class="fas fa-users"></i> Career Connect Expo</a></li>
+                            <li><a href="#impact"><i class="fas fa-handshake"></i> Be a Partner</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#support">
+                            SUPPORT <span class="arrow"><i class="fas fa-chevron-down"></i></span>
+                        </a>
+                        <ul class="dropdown">
+                            <li><a href="#contact"><i class="fas fa-envelope"></i> Contact</a></li>
+                            <li><a href="#contact"><i class="fas fa-calendar-check"></i> Schedule a Consultation</a></li>
+                        </ul>
+                    </li>
+                </ul>
+
+                <a href="#contact" class="contact-btn">Get in Touch</a>
+
+                <button class="hamburger" id="hamburger" aria-label="Toggle menu">
+                    <span class="hamburger-line"></span>
+                    <span class="hamburger-line"></span>
+                    <span class="hamburger-line"></span>
+                </button>
+            </nav>
+        </header>
+
+        <!-- ===== HERO ===== -->
+        <section class="hero" id="home">
+            <div class="hero-box">
+                <span class="hero-badge"><i class="fas fa-rocket"></i> Digital Innovation Leader</span>
+
+                <h1>
+                    BIGTECH<br>
+                    <span class="agency">AGENCY</span>
+                    <span class="limited">LIMITED</span>
+                </h1>
+
+                <p>Digital Innovative <span class="typing-text" id="typingText">Solutions</span></p>
+
+                <div class="gold-line"></div>
+
+                <p class="hero-description">
+                    Empowering Africa with innovative, scalable, and secure digital solutions
+                    for businesses, governments, and institutions.
+                </p>
+
+                <a href="#contact" class="hero-btn">
+                    <i class="fas fa-calendar-check"></i> Schedule a Consultation
+                </a>
+
+                <div class="hero-stats">
+                    <div class="stat-item">
+                        <span class="stat-number" data-target="150">0</span>
+                        <span class="stat-label">+ Projects Delivered</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number" data-target="98">0</span>
+                        <span class="stat-label">% Client Satisfaction</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number" data-target="4.9">0</span>
+                        <span class="stat-label">★ Average Rating</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===== ABOUT ===== -->
+        <section id="about">
+            <span class="section-tag">About Us</span>
+            <h2 class="section-title">Who We Are</h2>
+            <p class="subtitle">Empowering Africa with Innovative Solutions</p>
+
+            <div class="about">
+                <div class="robot">
+                    <i class="fas fa-microchip"></i>
+                </div>
+
+                <div>
+                    <h3>Digital Innovative Solution</h3>
+                    <div class="gold-line"></div>
+
+                    <p>
+                        BigTech Agency is a leading digital solutions provider, specializing in innovative
+                        and transformative software solutions. We offer scalable, secure, user-friendly,
+                        and efficient technologies tailored to meet diverse needs.
+                    </p>
+
+                    <br>
+
+                    <p>
+                        Committed to empowering businesses, government agencies, and institutions, we bridge
+                        digital gaps through cutting-edge solutions, driving transformation across healthcare,
+                        education, government MDAs, enterprises, households, and individuals in Africa.
+                    </p>
+
+                    <br>
+
+                    <a href="#services" class="hero-btn">Learn More</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===== MISSION ===== -->
+        <section id="impact">
+            <h2 class="section-title">Empowering <span class="gold">Africa</span></h2>
+            <div class="gold-line" style="margin:0 auto 50px;"></div>
+
+            <div class="mission-grid">
+                <div class="card">
+                    <span><i class="fas fa-bullseye"></i></span>
+                    <h3>Our Mission</h3>
+                    <p>
+                        To provide innovative, high-quality digital solutions that empower businesses,
+                        government MDAs, health institutions, academia, and individuals with advanced
+                        and secure technology.
+                    </p>
+                </div>
+
+                <div class="card">
+                    <span><i class="fas fa-eye"></i></span>
+                    <h3>Our Vision</h3>
+                    <p>
+                        To be a leading digital innovative solutions provider in Africa, driving
+                        transformation, empowering communities, and supporting business and academia growth.
+                    </p>
+                </div>
+
+                <div class="card">
+                    <span><i class="fas fa-flag-checkered"></i></span>
+                    <h3>Our Objectives</h3>
+                    <p>
+                        Drive innovation and efficiency with SaaS, empower governments with secure digital
+                        solutions, simplify operations, deliver quality IT services, forge partnerships,
+                        and empower communities through impactful technology.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===== INDUSTRIES ===== -->
+        <section>
+            <h2 class="section-title">Industries We <span class="gold">Serve</span></h2>
+            <p class="subtitle">
+                BigTech Agency provides <strong>Innovative digital solutions</strong> across multiple sectors
+            </p>
+
+            <div class="industry-grid">
+                <div class="industry-card">
+                    <div class="icon"><i class="fas fa-landmark"></i></div>
+                    <h3>Government MDAs</h3>
+                    <p>Enhancing public sector efficiency through digital transformation.</p>
+                </div>
+
+                <div class="industry-card">
+                    <div class="icon"><i class="fas fa-graduation-cap"></i></div>
+                    <h3>Education & Academia</h3>
+                    <p>University and school management systems for streamlined operations.</p>
+                </div>
+
+                <div class="industry-card">
+                    <div class="icon"><i class="fas fa-heartbeat"></i></div>
+                    <h3>Healthcare</h3>
+                    <p>Telemedicine, hospital management, and electronic medical records (EMR) solutions.</p>
+                </div>
+
+                <div class="industry-card">
+                    <div class="icon"><i class="fas fa-building"></i></div>
+                    <h3>Business & Enterprise</h3>
+                    <p>Scalable software tailored for commercial success.</p>
+                </div>
+
+                <div class="industry-card">
+                    <div class="icon"><i class="fas fa-users"></i></div>
+                    <h3>Individuals & Households</h3>
+                    <p>User-friendly digital solutions to simplify everyday life.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===== SERVICES ===== -->
+        <section class="services" id="services">
+            <span class="section-tag">What We Do</span>
+            <h2 class="section-title">Services We <span class="gold">Offer</span></h2>
+            <p class="subtitle">End-to-end digital solutions built for impact</p>
+
+            <div class="service-grid">
+                <div class="service-card">
+                    <div class="icon"><i class="fas fa-code"></i></div>
+                    <h3>Custom Software/Web App Development</h3>
+                    <p>
+                        We design and develop powerful, tailor-made software to solve specific business problems.
+                        From internal systems to client-facing platforms, we build scalable and secure solutions.
+                    </p>
+                    <a href="#contact" class="service-cta">Request a Quote <i class="fas fa-arrow-right"></i></a>
+                </div>
+
+                <div class="service-card">
+                    <div class="icon"><i class="fas fa-mobile-alt"></i></div>
+                    <h3>Mobile App Development</h3>
+                    <p>
+                        We create high-performance Android and iOS mobile apps that are easy to use and designed
+                        to grow with your business. Our apps help improve customer engagement and boost efficiency.
+                    </p>
+                    <a href="#contact" class="service-cta">Request a Quote <i class="fas fa-arrow-right"></i></a>
+                </div>
+
+                <div class="service-card">
+                    <div class="icon"><i class="fas fa-globe"></i></div>
+                    <h3>Web Development</h3>
+                    <p>
+                        We build fast, secure, and responsive websites that work perfectly on all devices.
+                        From government portals to business websites, our web solutions are optimized for SEO,
+                        speed, and user experience.
+                    </p>
+                    <a href="#contact" class="service-cta">Request a Quote <i class="fas fa-arrow-right"></i></a>
+                </div>
+
+                <div class="service-card">
+                    <div class="icon"><i class="fas fa-paint-brush"></i></div>
+                    <h3>Brand Identity Design</h3>
+                    <p>
+                        We help brands make a lasting impression through bold, consistent, and meaningful design.
+                        From your logo to your visual language, we build identities that reflect your values.
+                    </p>
+                    <a href="#contact" class="service-cta">Request a Quote <i class="fas fa-arrow-right"></i></a>
+                </div>
+
+                <div class="service-card">
+                    <div class="icon"><i class="fas fa-drafting-compass"></i></div>
+                    <h3>UI/UX Design & Digital Prototyping</h3>
+                    <p>
+                        We craft intuitive user interfaces and seamless digital experiences that put people first.
+                        From wireframes to interactive prototypes, our UI/UX design process is focused on clarity,
+                        usability, and impact.
+                    </p>
+                    <a href="#contact" class="service-cta">Request a Quote <i class="fas fa-arrow-right"></i></a>
+                </div>
+
+                <div class="service-card">
+                    <div class="icon"><i class="fas fa-chart-pie"></i></div>
+                    <h3>IT Consulting & Digital Strategy</h3>
+                    <p>
+                        We help organizations plan and execute digital transformation. Our experts provide
+                        guidance on technology, systems, and strategy to help you innovate and grow.
+                    </p>
+                    <a href="#contact" class="service-cta">Request a Quote <i class="fas fa-arrow-right"></i></a>
+                </div>
+
+                <div class="service-card" style="border-color:rgba(255,255,255,0.3);">
+                    <div class="icon"><i class="fas fa-chalkboard-teacher"></i></div>
+                    <h3>Digital Training & Capacity Building</h3>
+                    <p>
+                        We offer practical training in web development, UI/UX, data analytics, and more.
+                        Our programs are designed to upskill teams, empower youth, and build digital capacity
+                        for the future.
+                    </p>
+                    <a href="#contact" class="service-cta">Request a Quote <i class="fas fa-arrow-right"></i></a>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===== WHY PARTNER ===== -->
+        <section>
+            <div style="max-width:800px;margin:0 auto;text-align:center;">
+                <span class="section-tag">Why Us</span>
+                <h2 class="section-title">Why Partner with <span class="gold">BigTech</span></h2>
+                <p class="subtitle">
+                    We deliver smart, scalable, and secure digital solutions that make real impact.
+                    Whether you're a government body, NGO, or private enterprise, partnering with us
+                    means working with a team that delivers with purpose and precision.
+                </p>
+
+                <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:30px 0;text-align:left;">
+                    <div style="display:flex;align-items:center;gap:12px;color:rgba(255,255,255,0.8);background:var(--secondary);padding:12px 20px;border-radius:8px;border:1px solid rgba(255,255,255,0.1);">
+                        <i class="fas fa-check-circle" style="color:rgba(255,255,255,0.5);"></i> Proven Public Sector Expertise
+                    </div>
+                    <div style="display:flex;align-items:center;gap:12px;color:rgba(255,255,255,0.8);background:var(--secondary);padding:12px 20px;border-radius:8px;border:1px solid rgba(255,255,255,0.1);">
+                        <i class="fas fa-check-circle" style="color:rgba(255,255,255,0.5);"></i> Impact-focused approach
+                    </div>
+                    <div style="display:flex;align-items:center;gap:12px;color:rgba(255,255,255,0.8);background:var(--secondary);padding:12px 20px;border-radius:8px;border:1px solid rgba(255,255,255,0.1);">
+                        <i class="fas fa-check-circle" style="color:rgba(255,255,255,0.5);"></i> Global standards, Africa-first mindset
+                    </div>
+                    <div style="display:flex;align-items:center;gap:12px;color:rgba(255,255,255,0.8);background:var(--secondary);padding:12px 20px;border-radius:8px;border:1px solid rgba(255,255,255,0.1);">
+                        <i class="fas fa-check-circle" style="color:rgba(255,255,255,0.5);"></i> Results-Driven Solutions
+                    </div>
+                    <div style="display:flex;align-items:center;gap:12px;color:rgba(255,255,255,0.8);background:var(--secondary);padding:12px 20px;border-radius:8px;border:1px solid rgba(255,255,255,0.1);grid-column:1/-1;justify-content:center;">
+                        <i class="fas fa-check-circle" style="color:rgba(255,255,255,0.5);"></i> End-to-end Digital Services
+                    </div>
+                </div>
+
+                <p style="font-size:1.05rem;font-weight:600;color:white;margin-bottom:24px;font-family:'Poppins',sans-serif;">
+                    Choosing BigTech is choosing innovation, integrity, and sustainable impact.
+                </p>
+
+                <a href="#contact" class="hero-btn"><i class="fas fa-handshake"></i> Let's Work Together</a>
+            </div>
+        </section>
+
+        <!-- ===== FOUNDER ===== -->
+        <section style="background:rgba(0,0,0,0.1);">
+            <div class="founder-card">
+                <div class="quote-icon"><i class="fas fa-quote-left"></i></div>
+                <h2 style="font-size:2rem;margin-bottom:24px;font-family:'Poppins',sans-serif;color:white;">A Message from Our <span style="color:white;">Founder</span></h2>
+                <blockquote>
+                    <p>
+                        BigTech Agency was born out of a desire to close the digital gap in Africa.
+                        I believe technology is one of the most powerful tools we can use to empower
+                        people, strengthen institutions, and build sustainable solutions.
+                    </p>
+                    <p>
+                        We are building a future where no one is left behind. This is not just our
+                        mission. It is my personal commitment.
+                    </p>
+                </blockquote>
+                <div class="founder-name">— Founder, BigTech Agency</div>
+            </div>
+        </section>
+
+        <!-- ===== SOCIAL IMPACT STATS ===== -->
+        <section>
+            <span class="section-tag">Social Impact</span>
+            <h2 class="section-title">Our Mission to Impact <span class="gold">5,000 Youth</span></h2>
+            <p class="subtitle">
+                Career Connect Expo is BigTech Agency's flagship initiative designed to equip 5,000 youth
+                in 2025. It reflects our strong commitment to <strong>Corporate Social Responsibility</strong>
+                and <strong>youth empowerment across Africa</strong>.
+            </p>
+
+            <div class="impact-stats">
+                <div class="impact-stat">
+                    <span class="impact-number" data-target="1500">0</span>
+                    <span class="impact-label">+ Youth Impacted</span>
+                </div>
+                <div class="impact-stat">
+                    <span class="impact-number" data-target="20">0</span>
+                    <span class="impact-label">+ Startups Empowered</span>
+                </div>
+                <div class="impact-stat">
+                    <span class="impact-number" data-target="10">0</span>
+                    <span class="impact-label">+ Job Placements Secured</span>
+                </div>
+            </div>
+
+            <div class="impact-actions">
+                <a href="#" class="hero-btn"><i class="fas fa-file-download"></i> Download Impact Report</a>
+                <a href="#" class="hero-btn" style="background:transparent;border-color:rgba(255,255,255,0.3);color:white;">Explore the Expo <i class="fas fa-arrow-right"></i></a>
+            </div>
+
+            <div style="max-width:640px;margin:40px auto 0;">
+                <div style="background:var(--secondary);border:1px solid rgba(255,255,255,0.1);border-radius:20px;padding:60px 40px;text-align:center;cursor:pointer;transition:0.3s;" onmouseover="this.style.borderColor='rgba(255,255,255,0.5)'" onmouseout="this.style.borderColor='rgba(255,255,255,0.1)'">
+                    <i class="fas fa-play-circle" style="font-size:4rem;color:white;margin-bottom:16px;"></i>
+                    <p style="font-size:1.1rem;font-weight:600;color:white;font-family:'Poppins',sans-serif;">Career Connect Expo 2024</p>
+                    <span style="font-size:0.85rem;color:rgba(255,255,255,0.5);font-family:'Poppins',sans-serif;">BigTech Agency</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===== SUPPORT ===== -->
+        <section id="support" style="background:rgba(0,0,0,0.1);">
+            <div class="support-grid">
+                <div class="support-newsletter">
+                    <h2>Stay <span class="gold">Updated!</span></h2>
+                    <p>
+                        Join our mailing list to receive exclusive updates on empowerment programs,
+                        funding opportunities, and career-boosting resources.
+                    </p>
+                    <form id="newsletterForm" class="form-group">
+                        <input type="email" id="newsletterEmail" placeholder="example@mail.com" required>
+                        <button type="submit">Subscribe</button>
+                    </form>
+                    <div class="form-message" id="newsletterMessage"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===== CONTACT ===== -->
+        <section class="contact" id="contact">
+            <span class="section-tag">Connect</span>
+            <h2 class="section-title">Contact <span class="gold">Us</span></h2>
+
+            <div class="contact-wrapper">
+                <div class="contact-info">
+                    <p>
+                        We're here to answer your questions and provide you with all the information you need.
+                    </p>
+                    <p>
+                        You can also <a href="#" class="contact-link">Schedule a Consultation</a> at your convenience.
+                    </p>
+                    <div style="margin-top:32px;">
+                        <h4 style="font-size:0.9rem;font-weight:600;color:rgba(255,255,255,0.7);margin-bottom:12px;font-family:'Poppins',sans-serif;">Follow Us</h4>
+                        <div class="social-icons">
+                            <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                            <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                            <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                            <a href="#" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="contact-box">
+                    <form id="contactForm">
+                        <div class="form-row">
+                            <div>
+                                <label for="contactName">Full Name</label>
+                                <input type="text" id="contactName" placeholder="Full Name" required>
+                            </div>
+                            <div>
+                                <label for="contactEmail">Email Address</label>
+                                <input type="email" id="contactEmail" placeholder="Email Address" required>
+                            </div>
+                        </div>
+
+                        <label for="contactPhone">Phone Number</label>
+                        <input type="tel" id="contactPhone" placeholder="+234 800 000 0000">
+
+                        <label for="contactService">Service Interested In</label>
+                        <select id="contactService">
+                            <option value="">Select a service...</option>
+                            <option value="software">Custom Software Development</option>
+                            <option value="mobile">Mobile App Development</option>
+                            <option value="web">Web Development</option>
+                            <option value="branding">Brand Identity Design</option>
+                            <option value="uiux">UI/UX Design</option>
+                            <option value="consulting">IT Consulting</option>
+                            <option value="training">Digital Training</option>
+                        </select>
+
+                        <label for="contactMessage">Message</label>
+                        <textarea id="contactMessage" rows="5" placeholder="Tell us about your project..." required></textarea>
+
+                        <button type="submit" class="btn-full">Send Message <i class="fas fa-paper-plane"></i></button>
+                        <div class="form-message" id="contactMessageStatus"></div>
+                    </form>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===== FOOTER ===== -->
+        <footer>
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <div class="logo">
+                        BIGTECH
+                        <span class="logo-agency">AGENCY</span>
+                        <span class="logo-limited">LIMITED</span>
+                    </div>
+                    <p>
+                        BigTech Agency Limited was incorporated in Nigeria with the Corporate Affairs
+                        Commission on June 1, 2023, with Registration No: RC 6997082.
+                    </p>
+                    <div class="footer-socials">
+                        <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                        <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+
+                <div class="footer-links">
+                    <h4>Site</h4>
+                    <ul>
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="#about">About Us</a></li>
+                        <li><a href="#impact">Corporate Social Responsibility</a></li>
+                        <li><a href="#impact">Be a Partner</a></li>
+                        <li><a href="#impact">Career Connect Expo</a></li>
+                        <li><a href="#contact">Schedule a Consultation</a></li>
+                        <li><a href="#contact">Contact Us</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-links">
+                    <h4>Services</h4>
+                    <ul>
+                        <li><a href="#services">Software Development</a></li>
+                        <li><a href="#services">Mobile App Development</a></li>
+                        <li><a href="#services">Web Development</a></li>
+                        <li><a href="#services">UI/UX / Prototyping</a></li>
+                        <li><a href="#services">Brand Identity Design</a></li>
+                        <li><a href="#services">IT Consultation & Strategy</a></li>
+                        <li><a href="#services">Digital Training</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-contact">
+                    <h4>Get in Touch</h4>
+                    <p><i class="fas fa-envelope"></i> info@bigtechagency.com</p>
+                    <p><i class="fas fa-phone"></i> +234 800 000 0000</p>
+                    <p><i class="fas fa-map-marker-alt"></i> Nigeria</p>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p>&copy; 2026 BIGTECH Agency Limited. All Rights Reserved.</p>
+            </div>
+        </footer>
+
+    </div>
+
+    <!-- ===== JAVASCRIPT ===== -->
+    <script>
+        // ===== LOADER =====
+        setTimeout(() => {
+            document.getElementById('loader').classList.add('hidden');
+        }, 1200);
+
+        // ===== TYPING EFFECT =====
+        function typeText() {
+            const words = ["Solutions", "Services", "Systems", "Technologies"];
+            const element = document.getElementById('typingText');
+            let wordIndex = 0;
+            let charIndex = 0;
+            let isDeleting = false;
+
+            function type() {
+                const currentWord = words[wordIndex];
+
+                if (!isDeleting) {
+                    if (charIndex <= currentWord.length) {
+                        element.textContent = currentWord.substring(0, charIndex);
+                        charIndex++;
+                        setTimeout(type, 100);
+                    } else {
+                        isDeleting = true;
+                        setTimeout(type, 2500);
+                    }
+                } else {
+                    if (charIndex > 0) {
+                        element.textContent = currentWord.substring(0, charIndex);
+                        charIndex--;
+                        setTimeout(type, 50);
+                    } else {
+                        isDeleting = false;
+                        wordIndex = (wordIndex + 1) % words.length;
+                        setTimeout(type, 400);
+                    }
+                }
+            }
+
+            type();
+        }
+
+        // ===== STATS ANIMATION =====
+        function animateStats() {
+            document.querySelectorAll('.stat-number[data-target], .impact-number[data-target]').forEach(stat => {
+                const target = parseFloat(stat.getAttribute('data-target'));
+                if (isNaN(target)) return;
+
+                const duration = 2000;
+                const startTime = performance.now();
+                const isFloat = target % 1 !== 0;
+
+                function update(currentTime) {
+                    const elapsed = currentTime - startTime;
+                    const progress = Math.min(elapsed / duration, 1);
+                    const eased = 1 - Math.pow(1 - progress, 3);
+                    const current = eased * target;
+
+                    stat.textContent = isFloat ? current.toFixed(1) : Math.floor(current);
+
+                    if (progress < 1) {
+                        requestAnimationFrame(update);
+                    } else {
+                        stat.textContent = isFloat ? target.toFixed(1) : target;
+                    }
+                }
+                requestAnimationFrame(update);
+            });
+        }
+
+        // Run everything after loader
+        setTimeout(() => {
+            typeText();
+            animateStats();
+        }, 1400);
+
+        // ===== NAVIGATION - DROPDOWN TOGGLE FOR MOBILE =====
+        const hamburger = document.getElementById('hamburger');
+        const navLinks = document.getElementById('navLinks');
+
+        hamburger.addEventListener('click', () => {
+            navLinks.classList.toggle('open');
+            hamburger.classList.toggle('active');
+        });
+
+        // Mobile dropdown toggle
+        document.querySelectorAll('.nav-links > li > a').forEach(link => {
+            link.addEventListener('click', function(e) {
+                const parent = this.parentElement;
+                const dropdown = parent.querySelector('.dropdown');
+
+                if (window.innerWidth <= 900 && dropdown) {
+                    e.preventDefault();
+                    parent.classList.toggle('dropdown-open');
+
+                    document.querySelectorAll('.nav-links > li').forEach(li => {
+                        if (li !== parent) {
+                            li.classList.remove('dropdown-open');
+                        }
+                    });
+                }
+            });
+        });
+
+        // Close mobile menu on link click
+        document.querySelectorAll('.dropdown li a, .nav-links > li > a[href^="#"]').forEach(link => {
+            link.addEventListener('click', () => {
+                if (window.innerWidth <= 900) {
+                    if (!link.closest('li')?.querySelector('.dropdown')) {
+                        navLinks.classList.remove('open');
+                        hamburger.classList.remove('active');
+                    }
+                }
+            });
+        });
+
+        // Close dropdowns when clicking outside
+        document.addEventListener('click', (e) => {
+            if (!e.target.closest('nav')) {
+                document.querySelectorAll('.nav-links > li').forEach(li => {
+                    li.classList.remove('dropdown-open');
+                });
+            }
+        });
+
+        // ===== NEWSLETTER FORM =====
+        document.getElementById('newsletterForm').addEventListener('submit', (e) => {
+            e.preventDefault();
+            const input = document.getElementById('newsletterEmail');
+            const msg = document.getElementById('newsletterMessage');
+
+            if (!input.value || !input.value.includes('@')) {
+                msg.textContent = 'Please enter a valid email address.';
+                msg.className = 'form-message error';
+                return;
+            }
+
+            msg.textContent = '✅ Successfully subscribed! Check your email.';
+            msg.className = 'form-message success';
+            input.value = '';
+            setTimeout(() => { msg.textContent = ''; }, 5000);
+        });
+
+        // ===== CONTACT FORM =====
+        document.getElementById('contactForm').addEventListener('submit', (e) => {
+            e.preventDefault();
+            const msg = document.getElementById('contactMessageStatus');
+
+            const name = document.getElementById('contactName').value.trim();
+            const email = document.getElementById('contactEmail').value.trim();
+            const message = document.getElementById('contactMessage').value.trim();
+
+            if (!name || !email || !message) {
+                msg.textContent = 'Please fill in all required fields.';
+                msg.className = 'form-message error';
+                return;
+            }
+
+            if (!email.includes('@')) {
+                msg.textContent = 'Please enter a valid email address.';
+                msg.className = 'form-message error';
+                return;
+            }
+
+            msg.textContent = '✅ Message sent successfully! We\'ll get back to you soon.';
+            msg.className = 'form-message success';
+            document.getElementById('contactForm').reset();
+            setTimeout(() => { msg.textContent = ''; }, 5000);
+        });
+
+        // ===== VIDEO PLACEHOLDER =====
+        document.querySelector('[onmouseover]')?.addEventListener('click', () => {
+            alert('🎥 Career Connect Expo 2024 video would play here.');
+        });
+
+        console.log('%c 🚀 BIGTECH Agency Limited ', 'background: #1608c7; color: #ffffff; font-size: 20px; font-weight: bold; padding: 10px 20px; border-radius: 8px; border: 2px solid #ffffff;');
+    </script>
+
+</body>
+</html>
